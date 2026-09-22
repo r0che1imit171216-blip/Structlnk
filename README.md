@@ -35,7 +35,7 @@ The build verifies `APP_SOURCE_SHA256.json` before invoking Inno Setup. Output i
 
 ## Agent and data handling
 
-The canvas Agent can use OpenAI, Claude, DeepSeek, local, or compatible APIs. It reads the current canvas representation and only applies a proposed modification after the user approves it. API keys are stored locally with Windows protection and are not written into project files. See `Agent使用说明.md` for provider setup and data boundaries.
+The canvas Agent can use OpenAI, Claude, DeepSeek, local, or compatible APIs. It reads the current canvas representation and only applies a proposed modification after the user approves it. API keys are stored locally with Windows protection and are not written into project files. See `Agent-Guide.md` for provider setup and data boundaries.
 
 ## Compatibility and licensing
 

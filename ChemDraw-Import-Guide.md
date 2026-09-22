@@ -45,6 +45,6 @@ Structlnk 0.7.0，2026-09-18。
 
 0.3.0 的 20 项导入检查通过；0.4.0 另验证 CDX / CDXML 可直接进入统一主画布并继续编辑。0.5.7 使用本机 ChemDraw 2022 自带的苯 CDX 样例验证 Windows 原生 ChemDraw 剪贴板读取，转换后得到 6 个原子和 6 条可编辑键。已检查可见导入窗口、导入后的画布和嵌入图片的 PNG 导出。所有测试使用独立测试数据目录，用户自动恢复文件保持不变。尚未收到用户实际绘图，不能据此保证所有历史 ChemDraw 对象均兼容。
 
-详细检查记录见同目录 `验证结果.md`。
+详细检查记录见同目录 `Validation-Results.md`。
 
 引擎格式接口参考：[Ketcher 官方项目说明](https://github.com/epam/ketcher/blob/master/README.md)。本次实际验证以本地 Ketcher 3.18.0 / Indigo 1.46.0 为准。
