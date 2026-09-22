@@ -1,0 +1,104 @@
+{
+  "xo": false,
+  "bugs": {
+    "url": "https://github.com/remarkjs/remark/issues"
+  },
+  "dist": {
+    "shasum": "4d20a299665880e4f4af5d90b7c7b8a935853640",
+    "tarball": "https://registry.npmjs.org/remark-parse/-/remark-parse-9.0.0.tgz",
+    "fileCount": 4,
+    "integrity": "sha512-geKatMwSzEXKHuzBNU1z676sGcDcFoChMK38TgdHJNAYfFtsfHDQG7MoJAjs6sgYMqyLduCYWDIWZIxiPeafEw==",
+    "signatures": [
+      {
+        "sig": "MEYCIQDi5FHrLW1w4iG6wVjNp69R/BZSZIJVUiS+0dqHWUQw0AIhAMn5zitAffoa3+rmYrTEmZp0OKtQv9iMuSFCx7SrIaXz",
+        "keyid": "SHA256:jl3bwswu80PjjokCgh0o2w5c2U4LhQAE57gj9cz1kzA"
+      }
+    ],
+    "unpackedSize": 8251,
+    "npm-signature": "-----BEGIN PGP SIGNATURE-----\r\nVersion: OpenPGP.js v3.0.13\r\nComment: https://openpgpjs.org\r\n\r\nwsFcBAEBCAAQBQJfhrtjCRA9TVsSAnZWagAA0iQP/jvuxY2rMd7aO1+gO8I7\nPp7Qwy7QK37Vi/srl1j7xa9Qfhb1eZw7NBPEIg2Oq1Ll09hW+h0dFvQKXHhL\nPwfFF3v25tJTSlXR+Jb3IHUK0TyD6GRFb9U+NAV+/X7Gy37oQFUjvioZOQWJ\nYr3ecXD26nx3F/l3hNESpOq7QLw8sKIJjXNMqUEKf3fwQkhI4/X+nJjwWRKm\nBRuczRX/YMDtYJovRk7FGRzUOw9PEsWFUX+Y0XvZ6TzX3F3L6oSeKiHF/wfI\nqq3A7MFfd2M/HQ3kfB9Dc0BKAjx2fYQhw6CTX8/5vmh9OIg240FWq2hiVCAk\nl5T7KKjt43T6HWweXm+UIXpTjWr1V7ot7nERPy0tj5qH60ly1+jV1nE+gmAv\nZ9wnBILiX9WpCk9N+MYnRhleBTyBPIb0dXaSpOFgJLkLzopAclNYw9u7HO1R\nKS6h3uH1SVPijQqI+ZUWXz8qR1mjt6S9yxuJt9fo/KwK4NP687HiNLsCI/8s\nMjzEyxfzmFAvQ5PgdoWdsjNE5Sv65niXvmOv4ma7sDWBqu2wUWKUdyyQ6I/y\nt7DO1c0DdTJVemnFMt1Zvb5X7unWCUfarcJr82jRiH2dDGKGgSa6kD7fu+Fk\nNV21liOTJ2OWI3q2+T3aVpukvFI8zA9IbQQKKZvvEmwB0Hf17vRMVQrgZ9Rr\n0/4f\r\n=ntXi\r\n-----END PGP SIGNATURE-----\r\n"
+  },
+  "name": "remark-parse",
+  "types": "types/index.d.ts",
+  "author": {
+    "url": "https://wooorm.com",
+    "name": "Titus Wormer",
+    "email": "tituswormer@gmail.com"
+  },
+  "funding": {
+    "url": "https://opencollective.com/unified",
+    "type": "opencollective"
+  },
+  "license": "MIT",
+  "scripts": {
+    "test": "tape test.js"
+  },
+  "_npmUser": {
+    "name": "wooorm",
+    "email": "tituswormer@gmail.com"
+  },
+  "homepage": "https://remark.js.org",
+  "keywords": [
+    "unified",
+    "remark",
+    "remark-plugin",
+    "plugin",
+    "markdown",
+    "mdast",
+    "abstract",
+    "syntax",
+    "tree",
+    "ast",
+    "parse"
+  ],
+  "repository": {
+    "url": "https://github.com/remarkjs/remark/tree/main/packages/remark-parse",
+    "type": "git"
+  },
+  "_npmVersion": "6.14.8",
+  "description": "remark plugin to parse Markdown",
+  "directories": {},
+  "maintainers": [
+    {
+      "name": "wooorm",
+      "email": "tituswormer@gmail.com"
+    },
+    {
+      "name": "johno",
+      "email": "johnotander@gmail.com"
+    }
+  ],
+  "_nodeVersion": "14.13.1",
+  "contributors": [
+    {
+      "url": "https://wooorm.com",
+      "name": "Titus Wormer",
+      "email": "tituswormer@gmail.com"
+    },
+    {
+      "name": "Eugene Sharygin",
+      "email": "eush77@gmail.com"
+    },
+    {
+      "name": "Junyoung Choi",
+      "email": "fluke8259@gmail.com"
+    },
+    {
+      "name": "Elijah Hamovitz",
+      "email": "elijahhamovitz@gmail.com"
+    },
+    {
+      "name": "Ika",
+      "email": "ikatyang@gmail.com"
+    }
+  ],
+  "dependencies": {
+    "mdast-util-from-markdown": "^0.8.0"
+  },
+  "_hasShrinkwrap": false,
+  "_npmOperationalInternal": {
+    "tmp": "tmp/remark-parse_9.0.0_1602665315185_0.6771658836224153",
+    "host": "s3://npm-registry-packages"
+  },
+  "_id": "remark-parse@9.0.0",
+  "version": "9.0.0"
+}

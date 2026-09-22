@@ -1,0 +1,59 @@
+{
+  "bugs": {
+    "url": "https://github.com/GoogleChromeLabs/intersection-observer/issues"
+  },
+  "dist": {
+    "shasum": "4a45349cc0cd91916682b1f44c28d7ec737dc375",
+    "tarball": "https://registry.npmjs.org/intersection-observer/-/intersection-observer-0.12.2.tgz",
+    "fileCount": 6,
+    "integrity": "sha512-7m1vEcPCxXYI8HqnL8CKI6siDyD+eIWSwgB3DZA+ZTogxk9I4CDnj4wilt9x/+/QbHI4YG5YZNmC6458/e9Ktg==",
+    "signatures": [
+      {
+        "sig": "MEYCIQDY9sS9Iz0JhOC0eKjIhx6AU35bjSswKKtWpGaFJx4DIwIhAIcHJn+8mgVscKRq1jxVJalufn1cS3mYAXmUUEvtFwFx",
+        "keyid": "SHA256:jl3bwswu80PjjokCgh0o2w5c2U4LhQAE57gj9cz1kzA"
+      }
+    ],
+    "unpackedSize": 161656,
+    "npm-signature": "-----BEGIN PGP SIGNATURE-----\r\nVersion: OpenPGP.js v4.10.10\r\nComment: https://openpgpjs.org\r\n\r\nwsFzBAEBCAAGBQJiqMJiACEJED1NWxICdlZqFiEECWMYAoorWMhJKdjhPU1b\r\nEgJ2Vmp0xw/9FnA+fIAgEQPvfxNxUuwMt/F6H/B4F/SKMw4SqibsvtayuFFU\r\n9l3Yasj8/GhkUIm/bp+J8KQQ1D5VJzhuGo9gUWO1/pivoKt+FH24drXaEHK6\r\nCJvSmj8K3p32h7gBycO9ccwWlotMHOKSFhwYmqQLUVz5i11gp+0Yb70R5duX\r\n/CjBZcvucYAbEfXt6MnyNGQYjy9hH8GJKjieN/SaNocJG7NklFfBMVbB9tmQ\r\nlFMOW8+I9Fan51zWUnZ5e9LgAZg+b8RAGuA3PM91RLT3tVTbTJsJx9EkrAnl\r\ndN/ocK8dldtlbvA5NV8LMBS10zj2BVJdQLaxLeDrSLoWxwcf5E9e85OSIFpX\r\nU4PoK0TJVLLCeWFLbaHyKAnz4n20/zPTt9w7+jTj6M8mWOgAUl9kis54G+lk\r\n0CAT7whk5VLKsj4/8C8xNMWGAswdrklFZv7wo9uDl0tNxcZaccdfARZwYvCy\r\n/DxhmgLpwVoesnP6jwtb66Zx6db6vPC4FZD2OFKVrb2y/gOw4yjNPjb2URcW\r\nxvHjxjqODghDx2lSmKKPE1I1RdlJoqNOoixdQowWa5fj33lp8udQ5IF/jEN6\r\nItdJppGNVz+Dha2CSKsjpES7zgrrIj7ZiyxdsXy8K6V2ET8Wz6PlNaA5B2/o\r\nBKGDjvnXuQ5fB6a0iW/6mgIV+5+v+ADjMeY=\r\n=mVnL\r\n-----END PGP SIGNATURE-----\r\n"
+  },
+  "main": "intersection-observer.js",
+  "name": "intersection-observer",
+  "author": {
+    "url": "http://philipwalton.com",
+    "name": "Philip Walton",
+    "email": "philip@philipwalton.com"
+  },
+  "gitHead": "a7874945a27061d01e4076b8aae8b30abc756e97",
+  "license": "Apache-2.0",
+  "_npmUser": {
+    "name": "philipwalton",
+    "email": "philip@philipwalton.com"
+  },
+  "homepage": "https://github.com/GoogleChromeLabs/intersection-observer#readme",
+  "keywords": [
+    "Intersection",
+    "Observer"
+  ],
+  "deprecated": "The Intersection Observer polyfill is no longer needed and can safely be removed. Intersection Observer has been Baseline since 2019.",
+  "repository": {
+    "url": "git+https://github.com/GoogleChromeLabs/intersection-observer.git",
+    "type": "git"
+  },
+  "_npmVersion": "8.1.1",
+  "description": "A polyfill for IntersectionObserver",
+  "directories": {},
+  "maintainers": [
+    {
+      "name": "philipwalton",
+      "email": "philip@philipwalton.com"
+    }
+  ],
+  "_nodeVersion": "14.18.0",
+  "_hasShrinkwrap": false,
+  "_npmOperationalInternal": {
+    "tmp": "tmp/intersection-observer_0.12.2_1655226978236_0.8450614519138493",
+    "host": "s3://npm-registry-packages"
+  },
+  "_id": "intersection-observer@0.12.2",
+  "version": "0.12.2"
+}

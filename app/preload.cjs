@@ -1,0 +1,25 @@
+const {contextBridge,ipcRenderer}=require('electron');
+contextBridge.exposeInMainWorld('desktop',{
+  open:()=>ipcRenderer.invoke('project-open'),
+  acceptOpen:(docId,path)=>ipcRenderer.invoke('project-accept-open',docId,path),
+  newProject:docId=>ipcRenderer.invoke('project-close',docId),
+  save:(docId,text,name,saveAs=false)=>ipcRenderer.invoke('project-save',docId,text,name,saveAs),
+  autosave:(docId,text)=>ipcRenderer.invoke('autosave-doc',docId,text),
+  autosaveMeta:text=>ipcRenderer.invoke('autosave-meta',text),
+  recover:()=>ipcRenderer.invoke('recover'),
+  languageGet:()=>ipcRenderer.invoke('language-get'),
+  languageSave:value=>ipcRenderer.invoke('language-save',value),
+  readChemDrawClipboard:()=>ipcRenderer.invoke('chemdraw-clipboard-read'),
+  writeCanvasClipboard:source=>ipcRenderer.invoke('canvas-clipboard-write',source),
+  canvasShortcut:action=>ipcRenderer.invoke('canvas-shortcut',action),
+  exportFile:options=>ipcRenderer.invoke('export-file',options),
+  exportPdf:(svg,name,preset)=>ipcRenderer.invoke('export-pdf',svg,name,preset),
+  notices:()=>ipcRenderer.invoke('read-notices'),
+  example:key=>ipcRenderer.invoke('read-example',key),
+  agentConfigGet:()=>ipcRenderer.invoke('agent-config-get'),
+  agentConfigSave:value=>ipcRenderer.invoke('agent-config-save',value),
+  agentRequest:value=>ipcRenderer.invoke('agent-request',value),
+  agentProgress:callback=>{const listener=(_e,p)=>callback(p);ipcRenderer.on('agent-progress',listener);return()=>ipcRenderer.removeListener('agent-progress',listener);},
+  onCloseRequested:callback=>ipcRenderer.on('prepare-close',()=>callback()),
+  completeClose:ok=>ipcRenderer.invoke('complete-close',ok)
+});

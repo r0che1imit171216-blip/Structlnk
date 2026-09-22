@@ -1,0 +1,37 @@
+Structlnk 0.7.0 - third-party software notices
+
+Ketcher 3.18.0 (unmodified official standalone distribution)
+Copyright 2021 EPAM Systems. Apache License 2.0.
+https://github.com/epam/ketcher/tree/v3.18.0
+License: licenses/Ketcher-LICENSE.txt
+Upstream NOTICE: licenses/Ketcher-NOTICE.txt
+Bundled dependency notices: app/vendor/ketcher/static/js/*.LICENSE.txt
+Upstream dependency lock: licenses/Ketcher-package-lock.json
+
+Indigo 1.46.0 (bundled by the Ketcher standalone build)
+Copyright EPAM Systems. Apache License 2.0.
+https://github.com/epam/Indigo
+License: licenses/Indigo-LICENSE.txt
+Embedded version is pinned by the Ketcher 3.18.0 lock file: indigo-ketcher 1.46.0.
+
+Electron 44.4.1 (unmodified official Windows x64 distribution)
+Copyright Electron contributors. MIT License.
+https://github.com/electron/electron/tree/v44.4.1
+License: runtime/LICENSE
+Chromium and bundled third-party notices: runtime/LICENSES.chromium.html
+
+The Structlnk application shell and example layouts are independently authored.
+System fonts are referenced; font files are not redistributed by the shell.
+There is no ChemDraw code, artwork or template library in this project.
+Ketcher and Electron trademarks belong to their respective owners; no endorsement is implied.
+
+This is an internal research-group prototype. The upstream bundled notices are retained.
+Before public redistribution, reconcile all runtime dependencies against the exact distributed binaries, including any notices missing from upstream distributions.
+Release artifact sources and SHA256 values: THIRD_PARTY_VERSIONS.json.
+
+Additional materials collected for this prototype:
+- licenses/runtime-dependency-inventory.json: 347 npm dependency entries, including optional and peer dependencies.
+- licenses/npm/: license texts extracted from integrity-verified original packages.
+- sources/: original Ketcher 3.18.0 and Indigo 1.46.0 source archives, plus original npm archives for packages lacking standalone license files.
+- sources/SOURCE_VERSIONS.json: source archive origins and SHA256 hashes.
+- licenses/supplemental/: additional notices and package metadata. The supplemental fetch log records attempted locations; complete original sources are retained when standalone notice files are unavailable.

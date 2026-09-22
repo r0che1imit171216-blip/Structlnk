@@ -1,0 +1,25 @@
+# Local application data and recovery files
+data/
+*.bak
+*.tmp
+*.log
+
+# Bundled Windows runtime and generated installers
+runtime/
+dist/
+
+# Upstream source archives are retained locally for license review but are not
+# part of the source checkout because they are large and already documented.
+sources/
+
+# Test profiles, downloaded tools, and other disposable working files
+work/
+
+# Windows shell shortcuts are machine-specific
+*.lnk
+
+# Editor and operating-system noise
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/

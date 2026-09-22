@@ -1,0 +1,67 @@
+{
+  "bugs": {
+    "url": "https://github.com/idmadj/element-closest-polyfill/issues"
+  },
+  "dist": {
+    "shasum": "180960e8811ec4e731cad49a613db6ebaecc21ba",
+    "tarball": "https://registry.npmjs.org/element-closest-polyfill/-/element-closest-polyfill-1.0.7.tgz",
+    "fileCount": 3,
+    "integrity": "sha512-SX7RrUUEybUllkGjVf5XJR5I0Fl2L0iawK/caX/yJu94xW/WoRRD8Fky65gKpvqhU9PLBKOliIy4Ly2rDRzdUQ==",
+    "signatures": [
+      {
+        "sig": "MEQCIGUtFXbFzMlvbRpq01ZrBunezXz0TZpYq+T/+xEZamyqAiAj9KWciDME1LDCeCorR+4wqsOLTGdVOo8e8XtgH5yNDg==",
+        "keyid": "SHA256:jl3bwswu80PjjokCgh0o2w5c2U4LhQAE57gj9cz1kzA"
+      }
+    ],
+    "unpackedSize": 1882
+  },
+  "main": "index.js",
+  "name": "element-closest-polyfill",
+  "gitHead": "3163c54cfe6789bf4eadcffe73689476eeb0dd83",
+  "license": "ISC",
+  "scripts": {
+    "test": "jest --silent=false --verbose=true",
+    "prepublishOnly": "npm test"
+  },
+  "_npmUser": {
+    "name": "idmadj",
+    "email": "idmadj@gmail.com"
+  },
+  "homepage": "https://github.com/idmadj/element-closest-polyfill#readme",
+  "keywords": [
+    "element",
+    "closest",
+    "css",
+    "polyfill",
+    "microsoft",
+    "ie",
+    "msie",
+    "npm",
+    "package"
+  ],
+  "repository": {
+    "url": "git+https://github.com/idmadj/element-closest-polyfill.git",
+    "type": "git"
+  },
+  "_npmVersion": "8.19.2",
+  "description": "A minimal polyfill for Element.closest",
+  "directories": {},
+  "maintainers": [
+    {
+      "name": "idmadj",
+      "email": "idmadj@gmail.com"
+    }
+  ],
+  "_nodeVersion": "18.12.1",
+  "_hasShrinkwrap": false,
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "jest-environment-jsdom": "^29.7.0"
+  },
+  "_npmOperationalInternal": {
+    "tmp": "tmp/element-closest-polyfill_1.0.7_1700344679284_0.5218872661239169",
+    "host": "s3://npm-registry-packages"
+  },
+  "_id": "element-closest-polyfill@1.0.7",
+  "version": "1.0.7"
+}

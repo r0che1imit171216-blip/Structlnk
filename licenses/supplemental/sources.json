@@ -1,0 +1,22 @@
+[
+  {
+    "file": "element-closest-polyfill-ISC.txt",
+    "source": "https://raw.githubusercontent.com/idmadj/element-closest-polyfill/master/LICENSE",
+    "status": 404
+  },
+  {
+    "file": "intersection-observer-LICENSE.txt",
+    "source": "https://raw.githubusercontent.com/GoogleChromeLabs/intersection-observer/main/LICENSE",
+    "status": 404
+  },
+  {
+    "file": "remark-MIT.txt",
+    "source": "https://raw.githubusercontent.com/remarkjs/remark/12.0.0/license",
+    "status": 200
+  },
+  {
+    "file": "Indigo-1.46.0-LICENSE.txt",
+    "source": "https://raw.githubusercontent.com/epam/Indigo/indigo-1.46.0/LICENSE",
+    "status": 200
+  }
+]

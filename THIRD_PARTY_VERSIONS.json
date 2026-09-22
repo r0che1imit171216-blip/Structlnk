@@ -1,0 +1,16 @@
+[
+  {
+    "project": "epam/ketcher",
+    "version": "v3.18.0",
+    "asset": "ketcher-standalone-3.18.0.zip",
+    "sha256": "484e7f10a0e74808ae5f43f0e6448db6f4d884bdd2189aa271108474167a3e7e",
+    "source": "https://github.com/epam/ketcher/releases/download/v3.18.0/ketcher-standalone-3.18.0.zip"
+  },
+  {
+    "project": "electron/electron",
+    "version": "v44.4.1",
+    "asset": "electron-v44.4.1-win32-x64.zip",
+    "sha256": "34bc07977d6c43b6514b956a5f2e3292255daa3838a49e6110f3fe19ffafb83f",
+    "source": "https://github.com/electron/electron/releases/download/v44.4.1/electron-v44.4.1-win32-x64.zip"
+  }
+]

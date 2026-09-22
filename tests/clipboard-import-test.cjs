@@ -1,0 +1,15 @@
+const assert=require('node:assert/strict');
+const fs=require('node:fs');
+const {detectChemDrawClipboard,cleanFormat,isInterestingFormat}=require('../app/clipboard-import.cjs');
+const cdx=fs.readFileSync('C:/Program Files/PerkinElmerInformatics/ChemOffice2022/ChemDraw/Html/benzene.cdx');
+let result=detectChemDrawClipboard([{format:'ChemDraw Interchange Format',bytes:cdx}]);
+assert.equal(result.kind,'cdx');assert.equal(Buffer.from(result.content,'base64').subarray(0,8).toString(),'VjCD0100');
+result=detectChemDrawClipboard([{format:'Native',bytes:Buffer.concat([Buffer.from('OLE-prefix'),cdx])}]);assert.equal(result.kind,'cdx');
+result=detectChemDrawClipboard([{format:'text/xml',bytes:Buffer.from('<?xml version="1.0"?><CDXML><page/></CDXML>')}]);assert.equal(result.kind,'cdxml');
+result=detectChemDrawClipboard([{format:'SMILES',bytes:Buffer.from('c1ccccc1')}]);assert.deepEqual({kind:result.kind,content:result.content},{kind:'smiles',content:'c1ccccc1'});
+const ket=JSON.stringify({root:{nodes:[]}});result=detectChemDrawClipboard([{format:'text/plain',bytes:Buffer.from(ket)}]);assert.deepEqual({kind:result.kind,content:result.content},{kind:'ket',content:ket});
+const mol='ethanol\n  Structlnk\n\n  3  2  0  0  0  0            999 V2000\nM  END';result=detectChemDrawClipboard([{format:'text/plain',bytes:Buffer.from(mol)}]);assert.deepEqual({kind:result.kind,content:result.content},{kind:'mol',content:mol});
+assert.equal(detectChemDrawClipboard([{format:'image/png',bytes:Buffer.from('image')}]),null);
+assert.equal(cleanFormat('electron application/osclipboard;format="ChemDraw Interchange Format"'),'ChemDraw Interchange Format');
+assert.equal(isInterestingFormat('electron application/osclipboard;format="ChemDraw Interchange Format"'),true);
+console.log('PASS 9 clipboard format checks');
