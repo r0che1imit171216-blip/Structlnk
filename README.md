@@ -39,6 +39,6 @@ The canvas Agent can use OpenAI, Claude, DeepSeek, local, or compatible APIs. It
 
 ## Compatibility and licensing
 
-The `ACS 1996 兼容样式` is an independent implementation based on publicly described parameters. It does not copy ChemDraw code, artwork, templates, or style files. ChemDraw file import is a compatibility feature; complex layouts should be checked against the original document.
+The `ACS 1996 Compatible Style` is an independent implementation based on publicly described parameters. It does not copy ChemDraw code, artwork, templates, or style files. ChemDraw file import is a compatibility feature; complex layouts should be checked against the original document.
 
 Structlnk application code is released under the MIT License. Ketcher, Indigo, Electron, and other bundled components remain under their own licenses; see `THIRD_PARTY_NOTICES.txt` and `licenses/` before redistributing modified binaries.

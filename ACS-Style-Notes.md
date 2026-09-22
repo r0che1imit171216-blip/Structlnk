@@ -1,51 +1,51 @@
-# ACS 1996 兼容样式
+# ACS 1996 Compatible Style
 
-适用于 Structlnk 0.7.0。参数接入于 2026-09-16，统一画布于 2026-09-17 验证。
+This style is available in Structlnk 0.7.0. The parameters were integrated on 2026-09-16 and verified with the unified canvas on 2026-09-17.
 
-重新打开软件，在主画布上方「绘图样式」选择「ACS 1996 兼容样式」。「样式说明」可查看参数，Ctrl+Z 可撤销样式切换。
+Restart Structlnk and choose **ACS 1996 Compatible Style** from the drawing-style selector above the main canvas. Open **Style Notes** to review the parameters; Ctrl+Z can undo a style change.
 
-| 项目 | 预设 |
+| Item | Preset |
 | --- | --- |
-| 默认标准键长 | 14.4 pt，即 5.08 mm |
-| 普通键线宽 | 0.6 pt |
-| 楔形键宽度 | 2 pt |
-| 多重键间距 | 键长的 18% |
-| 虚线楔形键间距参数 | 2.5 pt |
-| 原子标签、文字 | Arial，10 pt，黑色；中文使用系统回退字体 |
-| SVG 绘图区 | 540 × 720 pt |
-| PDF | US Letter 612 × 792 pt，四边 36 pt 留白 |
-| PNG | 4500 × 6000，透明背景，600 dpi |
+| Default standard bond length | 14.4 pt (5.08 mm) |
+| Standard bond width | 0.6 pt |
+| Wedge bond width | 2 pt |
+| Multiple-bond spacing | 18% of the bond length |
+| Hashed wedge spacing | 2.5 pt |
+| Atom labels and text | Arial, 10 pt, black; system fallback for CJK text |
+| SVG drawing area | 540 × 720 pt |
+| PDF | US Letter, 612 × 792 pt, 36 pt margins |
+| PNG | 4500 × 6000 px, transparent background, 600 dpi |
 
-样式写入项目文件。切换样式保留 KET 结构数据、原子相对坐标和连接关系，不自动重排配合物几何。画布可以平移和缩放；视觉缩放不改变导出物理比例。14.4 pt 是新绘图及导出标定使用的默认标准键长，不是对每一条键的坐标锁定。
+The style is saved in the project file. Switching styles preserves KET data, relative atom coordinates, and connectivity; it does not automatically rearrange coordination geometry. The canvas can be panned and zoomed without changing the physical export scale. The 14.4 pt value is the default calibration for new drawing and export; it does not lock every bond coordinate.
 
-需要疏开拥挤结构时，切换到选择工具并拖动单个原子，即可手动调整相邻键长和键角。调整后的坐标会进入撤销记录，随 `.chemproj` 保存，并直接用于 SVG、PNG 和 PDF 导出；再次渲染或重新打开项目不会因该样式而自动复位。
+To spread out a crowded structure, select the selection tool and drag an individual atom. This manually adjusts adjacent bond lengths and angles. The new coordinates are undoable, saved in `.chemproj`, and used directly for SVG, PNG, and PDF export. Rendering or reopening the project does not reset those coordinates because of the style.
 
-反应与机理箭头使用化学引擎的 ACS 渲染设置。主画布富文本可以保留单独字号。样式切换会改变导出页面比例，请检查拥挤布局和箭头端点。
+Reaction and mechanism arrows use the chemistry engine's ACS rendering settings. Rich text on the main canvas can keep its own font size. The style changes the export page ratio, so check crowded layouts and arrow endpoints before publishing.
 
-公开参数参考：[ChemDraw 官方 ACS Document 1996 文档](https://support.revvitysignals.com/hc/en-us/articles/4408234173332)；这里的原名称只用于说明参数来源。Structlnk 根据这些公开参数独立实现此兼容样式，自行编写参数映射和页面逻辑，未复制 ChemDraw 的代码、样式文件、模板或图标。上游 Ketcher / Indigo 发行文件未修改。
+Public parameter reference: [ChemDraw ACS Document 1996 documentation](https://support.revvitysignals.com/hc/en-us/articles/4408234173332). The original name is mentioned only to identify the parameter source. Structlnk independently implements this compatible style from those public parameters, with its own parameter mapping and page logic. It does not copy ChemDraw code, style files, templates, or icons. The bundled Ketcher and Indigo distributions are unmodified.
 
-兼容范围：普通键、字体大小、黑白显示、多重键间距和导出物理比例已接入。标签避让、1.6 pt 标签留白、部分特殊粗键及复杂立体键的具体外观仍由化学引擎决定，不承诺与 ChemDraw 像素级一致。配位结构保留原几何，不强制套用有机链角。
+Compatibility scope: standard bonds, font size, black-and-white display, multiple-bond spacing, and physical export ratios are integrated. Label avoidance, 1.6 pt label padding, some special thick bonds, and complex stereobond appearance remain controlled by the chemistry engine and are not promised to be pixel-identical to ChemDraw. Coordination structures retain their original geometry and are not forced into organic-chain angles.
 
-## 实际验证
+## Verification
 
-以下 15 项在独立测试数据目录的 Electron 应用中通过，未覆盖用户的自动恢复文件：
+The following 15 checks passed in the Electron application with an isolated test-data directory; the user's recovery file was not used:
 
-1. Existing v1 project loads without mutation
-2. ACS dropdown applies style and preserves exact KET including metal geometry
-3. ACS molecule physical scale and 10 pt captions
-4. Undo restores original project exactly; redo restores ACS
-5. Chemical editor receives ACS settings; manually adjusted atom coordinates remain unchanged
-6. New project and newly drawn structures inherit chosen style
-7. New caption uses 10 pt
-8. Style and calibrated geometry persist in project file
-9. ACS SVG export
-10. ACS PNG export
-11. ACS PDF export
-12. SVG declares actual physical size
-13. Examples inherit ACS; curve bindings survive style application
-14. Restart restores document style
-15. Switch back restores standard editor, canvas and export mode
+1. Existing v1 project loads without mutation.
+2. The ACS selector applies the style while preserving exact KET data, including metal geometry.
+3. ACS molecule scale and 10 pt captions are correct.
+4. Undo restores the original project and redo restores ACS settings.
+5. The chemical editor receives ACS settings and manually adjusted atom coordinates remain unchanged.
+6. New projects and newly drawn structures inherit the selected style.
+7. New captions use 10 pt.
+8. Style and calibrated geometry persist in the project file.
+9. ACS SVG export works.
+10. ACS PNG export works.
+11. ACS PDF export works.
+12. SVG declares its physical dimensions.
+13. Examples inherit ACS settings and curve bindings survive style application.
+14. Restart restores the document style.
+15. Switching back restores the standard editor, canvas, and export mode.
 
-补充导出测量：最终 PDF 为单页 612 × 792 pt；普通键线宽实测 0.599999 pt；说明文字实测 9.997499 pt（浏览器渲染舍入）。PNG 为 4500 × 6000 RGBA，分辨率元数据约 599.9988 dpi（整数每米像素换算）。修正了 Indigo 浮点截断造成的键长缩放偏差，导出按 600 dpi 下 120 像素对应 14.4 pt 计算。已目视检查界面和实际 PDF 渲染。
+Final measurements: PDF is one 612 × 792 pt page; the measured standard bond width is 0.599999 pt and the measured caption size is 9.997499 pt after browser rounding. PNG is 4500 × 6000 RGBA with approximately 599.9988 dpi metadata. Indigo floating-point truncation was corrected; at 600 dpi, export calibration uses 120 pixels for 14.4 pt. The interface and rendered PDF were visually checked.
 
-示例位于 `examples/05-ACS1996-organic-reaction.chemproj`，通过软件顶部「打开」载入。
+The example is `examples/05-ACS1996-organic-reaction.chemproj`; open it from the application's **Open** command.
