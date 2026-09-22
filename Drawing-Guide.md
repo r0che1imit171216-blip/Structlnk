@@ -1,42 +1,40 @@
-# 直接绘图与统一画布
+# Direct Drawing and the Unified Canvas
 
-Structlnk 0.7.0，2026-09-18。
+Structlnk 0.7.0, 2026-09-18.
 
-本版把化学绘图和外层排版合并为一个主画布。原子、键、文字、反应箭头、平衡箭头、机理弯箭头、图片和图形都由同一编辑器管理，保存、撤销和导出也针对这一份画布数据。
+Chemistry drawing and page layout now share one main canvas. Atoms, bonds, text, reaction arrows, equilibrium arrows, curved mechanism arrows, images, and graphics are managed by the same editor. Saving, undo, and export operate on this single canvas dataset.
 
-## 常用工具
+## Common tools
 
-- 左侧：手形平移、框选、橡皮、键、链、S-Group、R-Group、反应加号、箭头、图形、文字和图片。
-- 底部：苯环及常用环模板。
-- 右侧：H、C、N、O、S、P、卤素、周期表和扩展元素工具；金属元素可从周期表选择。
-- 应用顶栏：新建、打开、保存、撤销、重做、项目名称、绘图样式、Agent、导出和语言切换。
-- 底部窗口条：切换、还原、关闭和重命名各画布窗口；点击铅笔或双击名称进入编辑。
-- 顶部画布工具：复制、剪切、结构整理、检查、设置和缩放。
-- 应用顶栏下方：绘图样式、统一撤销 / 重做、SMILES 追加和适合窗口。
-- 配色：选中原子或键后，可使用 16 种预设色或系统取色器设置任意高亮颜色。
+- Left: pan, box select, eraser, bond, chain, S-Group, R-Group, reaction plus sign, arrow, shape, text, and image.
+- Bottom: benzene and common ring templates.
+- Right: H, C, N, O, S, P, halogens, the periodic table, and extended element tools; metals are selected from the periodic table.
+- Top bar: new, open, save, undo, redo, project name, drawing style, Agent, export, and language switch.
+- Bottom window strip: switch, restore, close, and rename canvas windows; click the pencil or double-click a name to edit it.
+- Canvas toolbar: copy, cut, structure cleanup, checks, settings, and zoom.
+- Under the top bar: drawing style, unified undo/redo, SMILES append, and fit-to-window.
+- Highlight colors: after selecting atoms or bonds, choose one of 16 presets or use the system color picker.
 
-反应箭头按钮带有下拉菜单，可选择不同箭头。机理弯箭头使用椭圆弧箭头类型；单电子箭头使用半箭头类型。具体工具提示由 Ketcher 提供，主要为英文。
+The reaction-arrow button has a drop-down menu. Curved mechanism arrows use the ellipse-arc type; single-electron arrows use the half-arrow type. Tooltips are provided by Ketcher and are mainly in English.
 
-交替双键六元环模板点在已有普通碳上时，会形成共用一个原子的结构。0.4.1 会自动把共用碳的四条键调整为单键，使价态有效并保持骨架碳隐藏。带电、同位素、自由基、别名和显式价态碳不会被自动改写。
+Applying an alternating-double-bond six-membered ring template to an existing ordinary carbon creates a shared-atom structure. Structlnk automatically changes the shared carbon's four bonds to single bonds so valence stays valid and the skeleton carbon remains hidden. Charged, isotopic, radical, aliased, and explicitly labelled carbon atoms are not rewritten.
 
-复制和粘贴已合并到原子、键和线条共用的右键菜单中，也支持框选后直接按 Ctrl+C、Ctrl+V。没有有效选区时复制显示灰色；剪贴板中没有可识别的 Structlnk、ChemDraw 或 SMILES 数据时粘贴显示灰色。画布内复制使用 KET 保存选中的化学对象，副本会放在现有内容右侧的空白处并保持整体选中，可直接组合移动；点击一次画布后取消整体选中，原子、键和绘图对象继续自由编辑。
+Copy and paste are in the shared context menu for atoms, bonds, and lines. Box selection also supports Ctrl+C and Ctrl+V. Copy is disabled without a valid selection; paste is disabled when the clipboard contains no recognized Structlnk, ChemDraw, or SMILES data. Canvas copies are stored as KET, placed in the blank area to the right, and kept selected as one group so they can be moved together. Click the canvas once to release the group and edit atoms, bonds, and drawing objects independently.
 
-自定义高亮配色保存在项目数据中，切换画布或重新打开项目后会恢复，并纳入撤销、重做与自动恢复。清除全部配色不会删除任何化学对象。
+Custom highlights are stored in project data, restored when switching canvases or reopening projects, and included in undo, redo, and recovery. Clearing highlights does not delete chemical objects.
 
+The **Agent** button sends current KET/SMILES data to the configured model, which proposes reviewable changes. See `Agent-Guide.md` for API settings and limits.
 
+## Data and compatibility
 
-顶部「Agent」可以把当前 KET/SMILES 发送给用户配置的模型，由模型提出可审查的修改方案。Agent 面板、API 设置和限制见 `Agent-Guide.md`。
+New projects use format version 2 with KET as the core data. Version 1 projects are converted to the unified KET canvas, with the pre-conversion project embedded as `originalProject`. The old file is not overwritten on the first migrated save; the Export menu can also recover the pre-conversion data.
 
-## 数据与兼容性
+Legacy molecules are migrated from their displayed positions and bond lengths. Text and arrows become KET objects. Legacy arrow-to-molecule bounding-box bindings have no one-to-one KET equivalent, so their visible position is preserved but the binding is not; recheck mechanism arrows after moving a molecule.
 
-新项目使用 `chemistry-lab` 版本 2，核心内容保存为 KET。旧版版本 1 项目会转换到统一 KET 画布，转换前项目嵌入 `originalProject`。软件不会在第一次迁移保存时覆盖旧文件；导出菜单也可取回转换前数据。
+Selected CDX/CDXML pages enter the same canvas directly, without an outer object that must be double-clicked. See `ChemDraw-Import-Guide.md` for format boundaries.
 
-旧版分子根据原显示位置和键长迁移，文字与箭头转成 KET 对象。旧版箭头与分子包围框的绑定关系没有 KET 中的一一对应形式，因此迁移后保留可见位置，不再作为绑定关系；移动分子时应重新检查机理箭头。
+## Verification
 
-ChemDraw CDX / CDXML 的所选页面会直接进入同一画布，内部对象不再包成一个需要双击的外层对象。复杂格式的兼容边界见 `ChemDraw-Import-Guide.md`。
+Seventeen unified-canvas integration checks and three final checks passed. They cover direct bonds, reaction arrows and text, SMILES append, recovery, unified undo/redo, Ctrl+S inside the canvas, version 2 reopening, ACS settings and four exports, four legacy examples, cisplatin coordination bonds, original-project recovery, CDX/CDXML import, close/restart recovery, and protection of old files during migration.
 
-## 验证
-
-17 项统一画布集成检查和 3 项收尾检查通过，覆盖：直接绘制键、反应箭头与文字，SMILES 追加，自动恢复，统一撤销 / 重做，画布内 Ctrl+S，版本 2 重开，ACS 设置与四种导出，四类旧版示例迁移、顺铂配位键、原始项目取回，CDX / CDXML 导入，关闭重启恢复，以及旧文件不被迁移保存覆盖。
-
-所有自动化检查使用独立测试数据目录；用户的 `data/recovery.chemproj` 在检查前后保持不变。详细项目见 `Validation-Results.md`。
+All automated checks use isolated test-data directories; `data/recovery.chemproj` is unchanged before and after testing. See `Validation-Results.md` for the detailed record.

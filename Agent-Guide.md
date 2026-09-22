@@ -1,70 +1,70 @@
-# 画布 Agent 使用说明
+# Canvas Agent Guide
 
-Structlnk 0.7.0，2026-09-21。
+Structlnk 0.7.0, 2026-09-21.
 
-## 能做什么
+## Capabilities
 
-画布 Agent 会读取当前画布的 KET 化学图数据，并在可用时同时读取 SMILES。你也可以附加一张本地化学图片，让支持视觉的模型识别其中的分子、反应、文字或排版，再生成可编辑结构。KET 上下文能准确提供已有原子、键、坐标、文字和箭头；图片适合处理论文截图、扫描图或其他软件导出的结构图。
+The canvas Agent reads the current KET chemical graph and, when available, its SMILES representation. You can also attach a local chemistry image so a vision-capable model can identify molecules, reactions, text, or layout and produce editable structures. KET context supplies existing atoms, bonds, coordinates, text, and arrows accurately; images are useful for paper screenshots, scans, or structures exported by another application.
 
-Agent 可以直接回答关于当前画布的问题，也可以把一次指令拆成多条受约束的画布操作：添加结构、条件文字和反应箭头，移动、旋转或对齐对象，以及按 ID 修改原子标签、电荷和键型。新内容未指定坐标时会自动放到现有内容右侧的空白区域。只有模型判断需要改动画布时，面板才显示修改摘要、风险提示和批准区；点击「批准并应用」后修改才进入画布，整批操作可一次撤销。
+The Agent can answer questions about the current canvas or split one instruction into constrained canvas operations: add structures, condition text, and reaction arrows; move, rotate, or align objects; and change atom labels, charges, and bond types by ID. New content without an explicit position is placed in the blank area to the right of existing content. The panel shows a change summary, risk notice, and approval area only when the model proposes a canvas modification. Nothing enters the canvas until **Approve and Apply** is clicked, and the whole batch can be undone once.
 
-## 配置 API
+## API configuration
 
-1. 点击顶部「Agent」，再点击右侧面板中的齿轮。
-2. 在「服务商」中选择 **OpenAI**、**Claude (Anthropic)**、**DeepSeek**、本地兼容接口或自定义兼容接口。
-3. 选择 **Claude** 时，软件会自动填写 Anthropic Messages API、`https://api.anthropic.com/v1` 和默认模型 `claude-sonnet-4-6`。选择 **DeepSeek** 时会填写 Chat Completions、`https://api.deepseek.com` 和 `deepseek-flash`。
-4. 填写相应服务商的 API 密钥。选择其他服务商时，请核对 API 根地址、接口协议和账户可用模型。
-5. 保存后输入问题或修改指令，点击右侧发送箭头。需要识图时先点击「图片」选择文件；也可以只附图发送，此时默认尝试把图中结构转换为可编辑内容。
+1. Click **Agent** in the top bar, then click the gear in the right panel.
+2. Choose **OpenAI**, **Claude (Anthropic)**, **DeepSeek**, a local compatible endpoint, or a custom compatible endpoint under **Provider**.
+3. For **Claude**, Structlnk fills the Anthropic Messages API, `https://api.anthropic.com/v1`, and the default model `claude-sonnet-4-6`. For **DeepSeek**, it fills Chat Completions, `https://api.deepseek.com`, and `deepseek-flash`.
+4. Enter the provider API key. For other providers, check the API root, protocol, and model IDs available to your account.
+5. Save the settings, enter a question or edit instruction, and click the send arrow. To use image recognition, click **Image** first; an image-only request will try to convert the depicted structure into editable content.
 
-OpenAI 根地址通常填写 `https://api.openai.com/v1`。Claude 使用 Anthropic Messages API，请求发送到 `/v1/messages`，通过 `x-api-key` 鉴权，并采用 JSON Schema 结构化输出。DeepSeek 预设使用其 OpenAI 兼容根地址 `https://api.deepseek.com`，请求发送到 `/chat/completions`。其他服务应使用其官方文档给出的根地址和模型 ID。远程地址必须使用 HTTPS；`localhost`、`127.0.0.1` 和 `::1` 可以使用 HTTP。更换 API 地址时，软件不会把原地址保存的密钥带到新地址。
+OpenAI usually uses `https://api.openai.com/v1`. Claude uses the Anthropic Messages API at `/v1/messages`, authenticates with `x-api-key`, and requests structured JSON output. The DeepSeek preset uses the OpenAI-compatible root `https://api.deepseek.com` and sends requests to `/chat/completions`. Other providers should use the official root URL and model ID from their documentation. Remote endpoints must use HTTPS; `localhost`, `127.0.0.1`, and `::1` may use HTTP. When an API address changes, Structlnk does not carry the key saved for the previous address to the new address.
 
-DeepSeek 默认使用 `deepseek-flash`，该模型支持图片输入；`deepseek-v4-pro` 当前只用于文字请求，附图时软件会提示改用 `deepseek-flash`。深度思考默认关闭，复杂机理或价态判断可在设置中开启。DeepSeek 请求使用流式返回，面板显示等待时间与已接收数据量，单次请求最长等待 5 分钟。
+DeepSeek defaults to `deepseek-flash`, which accepts image input. `deepseek-v4-pro` is currently used for text-only requests; with an attached image, Structlnk asks you to switch to `deepseek-flash`. Extended reasoning is off by default and can be enabled for difficult mechanism or valence questions. DeepSeek requests stream their response, and the panel shows elapsed time and received bytes. A single request can wait up to five minutes.
 
-API 密钥在 Electron 主进程中使用 Windows `safeStorage` 加密后保存于应用数据目录，不写入 `.chemproj`、KET、导出文件或渲染页面。生成方案时，你的指令、当前 KET/SMILES、项目名称、样式、对象数量及所附图片会发送到所配置的 API；数据处理规则取决于该 API 服务商。图片只用于当次请求，请求成功后从面板清除，不保存进项目文件。
+API keys are encrypted with Windows `safeStorage` in the Electron main process and saved in the application-data directory. They are not written to `.chemproj`, KET, export files, or rendered pages. For a plan request, your instruction, current KET/SMILES, project name, style, object counts, and attached image are sent to the configured API. Data handling follows that provider's policy. An image is used only for that request, cleared from the panel after success, and never saved in the project.
 
-## 上传图片识别
+## Image recognition
 
-Agent 面板输入区左下角的「图片」支持 JPEG、PNG、GIF 和 WebP。单张图片上限为 10 MB，最长边不超过 8192 像素；选择后会先在本机显示缩略图，可以在发送前移除。一次请求附加一张图片，并同时携带当前画布上下文，因此可用“按图中结构替换选区”“把截图里的反应添加到当前画布”等指令。
+The **Image** button in the lower-left of the Agent input accepts JPEG, PNG, GIF, and WebP. Each image is limited to 10 MB and an 8192-pixel longest edge. A local thumbnail is shown before sending and can be removed. One image may be attached per request; the current canvas context is sent with it, so instructions such as “replace the selected structure with the one in the image” or “add the reaction from the screenshot to the current canvas” are supported.
 
-单一清晰分子通常可转换为 SMILES 或 Molfile 后加入画布；多分子反应、条件文字和复杂排版可能需要模型生成完整 KET。图片识别无法保证键级、手性、同位素、电荷、配位方向和机理箭头完全正确。软件要求模型把不确定项写入警告，并继续保留“先审查、再应用、可撤销”的流程。
+A single clear molecule can usually be converted to SMILES or Molfile and added to the canvas. Multi-molecule reactions, condition text, and complex layouts may require the model to produce a complete KET structure. Image recognition cannot guarantee bond order, stereochemistry, isotopes, charges, coordination direction, or mechanism arrows. The Agent must put uncertain items in its warning, and the review, approval, and undo workflow remains in place.
 
-## 修改方式
+## Modification modes
 
-- `add_source`：用 SMILES、Molfile 等向当前画布添加结构。
-- `replace_source`：用 SMILES、反应 SMILES、Molfile 或 RXN 替换整个画布。
-- `canvas_ops`：组合执行添加结构、文字、反应箭头、移动、旋转、对齐、修改原子和修改键；每次最多 20 条操作，并在应用前校验对象 ID、坐标、数量和属性范围。
-- `replace_ket`：保留当前排版，对原子、键、文字和箭头做局部修改。
-- `set_highlight`：给指定结构、官能团或当前选区设置背景高亮颜色。
-- `clear_highlight`：清除指定对象或整张画布的背景高亮。
-- `no_change`：直接回答问题、指令不明确或无法安全修改时不改动画布，也不会显示批准区。
+- `add_source`: add a structure from SMILES, Molfile, or another supported source.
+- `replace_source`: replace the whole canvas with SMILES, reaction SMILES, Molfile, or RXN.
+- `canvas_ops`: combine structure, text, reaction-arrow, move, rotate, align, atom, and bond operations; at most 20 operations per request.
+- `replace_ket`: keep the layout while making local atom, bond, text, or arrow changes.
+- `set_highlight`: add background highlighting to a specified structure, functional group, or selection.
+- `clear_highlight`: clear highlighting from selected objects or the whole canvas.
+- `no_change`: answer without modifying the canvas when the instruction is unclear or a safe edit is not possible.
 
-软件会检查返回类型、大小、KET 基本结构、颜色值、对象 ID、坐标和操作数量。操作完成后还会读取实际画布确认结果有效；失败时恢复应用前内容。模型返回内容不会作为代码执行，也不能直接访问本机文件。
+Structlnk checks the response type, size, KET structure, colors, object IDs, coordinates, and operation count. After applying a plan it reads the actual canvas to confirm the result; on failure it restores the pre-application content. Model output is never executed as code and cannot directly access local files.
 
-用套索或框选工具选中部分对象后发送指令，Agent 会把选中原子、键、文字和箭头的坐标作为限定上下文。软件会拒绝模型在存在选区时返回整图替换方案；局部修改仍应在批准前检查摘要与画布结果。
+When lasso or box selection is active, the Agent receives the selected atoms, bonds, text, and arrows as constrained context. The application rejects a whole-canvas replacement while a selection exists; local edits must remain inside the selected IDs and should be reviewed before approval.
 
-Agent 还会收到当前画布原子、键、文字、箭头的对象映射以及已有配色，因此可以理解“给苯环上浅黄色背景”“把羟基标成蓝色”“移动箭头并添加反应条件”等指令。存在选区时，对已有对象的修改被限制在选区 ID 内；添加新内容仍然可用。没有选区时，模型必须根据对象映射指出修改目标。未指定颜色时默认建议使用柔和浅黄色 `#F4D35E`。配色使用项目已有高亮系统，不会改写分子 KET 或键级。
+The Agent also receives object mappings for atoms, bonds, text, and arrows, together with existing highlight colors. It can therefore understand requests such as “give this benzene ring a pale-yellow background,” “mark the hydroxyl group blue,” or “move the arrow and add the reaction condition.” Existing-object edits are restricted to the selected IDs when a selection exists. New content remains available. Without a selection, the model must identify targets from the object mapping. If no color is supplied, the suggested default is pale yellow `#F4D35E`. Highlighting uses the project's existing color system and does not rewrite molecular KET data or bond orders.
 
-## 指令示例
+## Example instructions
 
-- `在当前画布上添加一个乙醇分子。`
-- `把左侧苯环的一个碳替换成氮，保持其他对象和坐标不变。`
-- `把这条单键改成双键，并检查相邻原子的价态。`
-- `保留反应物和产物，在箭头上方添加 Pd(PPh3)4，箭头下方添加 THF。`
-- `在右侧空白处添加苯和溴乙烷，中间放一条反应箭头，上方写 FeBr3。`
-- `把选中的配合物向右移动 3 个单位，再顺时针旋转 20 度。`
-- `给这个苯环添加浅黄色背景色。`
-- `把选中的配体标成淡蓝色。`
+- `Add an ethanol molecule to the current canvas.`
+- `Replace one carbon in the left benzene ring with nitrogen while preserving every other object and coordinate.`
+- `Change this single bond to a double bond and check the valence of adjacent atoms.`
+- `Keep the reactant and product, add Pd(PPh3)4 above the arrow, and add THF below it.`
+- `Add benzene and bromoethane in the blank area on the right, place a reaction arrow between them, and write FeBr3 above the arrow.`
+- `Move the selected complex 3 units to the right and rotate it clockwise by 20 degrees.`
+- `Give this benzene ring a pale-yellow background.`
+- `Mark the selected ligand light blue.`
 
-尽量指明结构位置、目标原子或希望保留的内容。复杂画布可先要求 Agent 说明它识别到的对象，再发修改指令。
+Specify the structure location, target atom, or content that must be preserved. For a complex canvas, first ask the Agent to describe the objects it recognizes, then send the edit instruction.
 
-## 边界
+## Boundaries
 
-只有通过 Agent 面板明确附加的图片会作为视觉输入发送。画布中已经存在的普通位图仍只作为 KET 图片节点处理，不会自动提取后再次发送。单次发送的画布上下文上限为 2 MB，返回 KET 上限为 5 MB。
+Only images explicitly attached through the Agent panel are sent as vision input. Existing bitmap nodes on the canvas remain KET image nodes and are not automatically extracted and sent again. Canvas context is limited to 2 MB per request and returned KET to 5 MB.
 
-大模型可能生成错误的价态、立体化学、配位方向、反应条件或机理。批准前检查摘要，应用后检查画布；需要时立即撤销。Agent 是绘图助手，不替代化学判断。
+Models can produce incorrect valence, stereochemistry, coordination direction, reaction conditions, or mechanisms. Check the summary before approval and the canvas after applying it; undo immediately when necessary. The Agent assists drawing and does not replace chemical judgment.
 
-OpenAI Responses API 的结构化输出和图片输入参考官方文档：<https://developers.openai.com/api/reference/resources/responses/methods/create>。
+API references:
 
-Claude Messages API、图片内容块与结构化输出参考 Anthropic 官方文档：<https://platform.claude.com/docs/en/api/messages/create>。
-
-DeepSeek OpenAI 兼容接口、根地址和模型名称参考官方文档：<https://api-docs.deepseek.com/>。
+- [OpenAI Responses API](https://developers.openai.com/api/reference/resources/responses/methods/create)
+- [Anthropic Messages API](https://platform.claude.com/docs/en/api/messages/create)
+- [DeepSeek API](https://api-docs.deepseek.com/)

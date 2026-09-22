@@ -1,96 +1,81 @@
-# Structlnk · 课题组绘图工作台
+# Structlnk · Research Group Chemistry Workspace
 
-版本：0.7.0，Windows x64 离线桌面原型。
+Version 0.7.0, an offline Windows x64 desktop prototype.
 
-## 启动
+## Launch
 
-双击本文件夹中的 **启动 Structlnk.lnk**。软件已经包含运行环境，不需要安装 Node.js、Python 或 ChemDraw。若移动整个文件夹，请使用 **启动 Structlnk.vbs**；也可以直接运行 `runtime/electron.exe`。
+Double-click **Launch Structlnk.vbs** in this folder. The application includes its runtime and does not require Node.js, Python, or ChemDraw. You can also run `runtime/electron.exe` directly.
 
-## 安装与更新
+## Installation and updates
 
-`dist` 文件夹中的 **Structlnk-Setup-0.7.0-x64.exe** 是 Windows x64 安装包。默认安装到 `%LOCALAPPDATA%\Programs\Structlnk`，无需管理员权限，并创建开始菜单快捷方式；安装时可选择桌面快捷方式。
+`dist/Structlnk-Setup-0.7.0-x64.exe` is the Windows x64 installer. It installs by default to `%LOCALAPPDATA%\Programs\Structlnk`, requires no administrator rights, and creates a Start Menu shortcut. A desktop shortcut can be selected during setup.
 
-以后取得更高版本的安装包后，直接运行并安装到原位置即可覆盖升级。安装版的 API 设置、界面语言和自动恢复数据保存在 `%APPDATA%\Structlnk`，升级或卸载程序文件不会删除这些数据。当前安装包尚未使用商业代码签名证书，首次运行时 Windows 可能显示 SmartScreen 提示；公开发布前应完成代码签名。
+Run a newer installer in the same location to upgrade. API settings, interface language, and recovery data are stored in `%APPDATA%\Structlnk`; upgrading or uninstalling application files does not remove those user files. The current installer is not signed with a commercial certificate, so Windows may display a SmartScreen warning the first time it runs.
 
-## 直接绘图
+## Direct drawing
 
-绘图和画布现已合并。打开软件后，画布四周的化学工具就是主编辑界面，不再需要打开独立结构窗口，也没有“放入画布 / 更新画布”步骤。
+Drawing and page layout are combined. The canvas tools around the main editor are the complete drawing interface; there is no separate structure window and no “place into canvas” step.
 
-1. 使用左侧的选择、键、链、S-Group、箭头、文字和图片工具直接绘图；底部是常用环模板，右侧是常用元素与周期表。
-2. 键、环、文字、反应箭头、平衡箭头和机理弯箭头都在同一画布中选择、移动和修改。
-3. 顶部输入框可以用 SMILES 追加结构，不会清除已经画好的内容。
-4. Ctrl+S 保存整个当前画布；画布中的改动会自动写入恢复副本，不需要另行确认。
-5. 「适合窗口」可显示全部内容。画布可平移、缩放；视觉缩放不改变 ACS 导出的物理比例。
+1. Use the left-side selection, bond, chain, S-Group, arrow, text, and image tools. Common ring templates are at the bottom; elements and the periodic table are on the right.
+2. Bonds, rings, text, reaction arrows, equilibrium arrows, and curved mechanism arrows can be selected, moved, and edited on the same canvas.
+3. The SMILES field appends a structure without clearing existing content.
+4. Ctrl+S saves the complete current canvas. Changes are also written to a recovery copy automatically.
+5. **Fit to Window** shows all content. Panning and zooming do not change ACS physical export scale.
 
-界面使用紧凑的 ChemDraw 式顶部操作区：新建、打开、保存和撤销位于左侧，项目名称居中，样式、Agent、导出、语言和帮助位于右侧。原左侧绘图示例栏已经移除，「新建」移到顶栏。
+The compact ChemDraw-style top bar places new, open, save, and undo on the left; the project name in the center; and style, Agent, export, language, and help on the right. The old example sidebar has been removed and **New** is in the top bar.
 
-可以同时打开多个项目或导入页面。底部窗口条用于切换、还原和关闭画布；点击小窗中的铅笔，或双击画布名称，可以直接重命名，Enter 或失去焦点保存，Esc 取消。已有的最小化画布无需还原即可改名。每个画布有独立的名称、撤销、重做、保存路径和自动恢复副本。
+Multiple projects or imported pages can be open at once. The bottom window strip switches, restores, and closes canvases. Click the pencil or double-click a canvas name to rename it; Enter or focus loss saves, and Esc cancels. Minimized canvases can be renamed without restoring them. Each canvas has its own name, undo history, save path, and recovery copy.
 
-主画布只显示一份右键菜单。右键点在原子、键或线条上时，复制、粘贴会和该对象的编辑选项出现在同一菜单中；当前不能执行的选项显示灰色，有有效选区或可识别剪贴板内容时自动亮起。框选原子和键后可直接按 **Ctrl+C**，再按 **Ctrl+V** 粘贴到当前画布；也可以使用右键菜单。画布内复制会把选区保存为可编辑 KET，副本自动放到现有内容右侧的空白处，并保持整体选中状态，可以直接拖动；点击一次画布后取消整体选中，即可重新单独编辑原子和键。「粘贴」还会自动识别 ChemDraw 原生剪贴板数据或 SMILES，复杂或多页内容进入导入预览。
+The main canvas uses one context menu. Right-clicking an atom, bond, or line shows copy and paste together with object-editing options. Actions that are unavailable are disabled. Box-select atoms and bonds, press **Ctrl+C**, then press **Ctrl+V** to paste an editable copy into the blank area on the right. The pasted group remains selected so it can be moved as one unit; click the canvas once to release the group and edit individual atoms and bonds.
 
-点击 SMILES 工具条右侧的「配色」，可以给当前选中的原子和键设置高亮颜色。面板提供 16 种预设色和系统取色器，可输入任意颜色；配色会随 `.chemproj`、自动恢复和多画布切换保存，也支持撤销、重做和一键清除。
+Click **Colors** beside the SMILES toolbar to highlight selected atoms and bonds. The panel provides 16 presets and a system color picker. Colors are saved with `.chemproj`, recovery data, and multi-canvas state, and support undo, redo, and clear-all.
 
-顶栏的 **EN / 中文** 按钮可以切换应用界面语言，选择会保存到本机，关闭并重启后继续使用。工作区、帮助、ACS 样式、ChemDraw 导入和 Agent 设置均会同步切换。项目名称、画布文字和模型返回内容属于用户内容，不会被自动翻译。
+The **EN / Chinese** button switches the application shell and saves the choice locally. Workspace, help, ACS style, ChemDraw import, and Agent settings follow the selected language. Project names, canvas text, and model output are user content and are not automatically translated. The embedded Ketcher tooltips are supplied by the upstream build and are mainly English.
 
-内嵌主画布使用当前 Ketcher 独立构建自带的界面资源，其工具提示主要为英文，不随外层语言按钮切换。箭头工具的下拉菜单提供反应、平衡、逆合成及椭圆弧箭头，其中半箭头可用于单电子机理。配位键需使用键工具中的配位键类型，并核对供体到金属的方向。
+## Canvas Agent
 
-将交替双键六元环模板点在已有普通碳原子上时，软件会把共用碳的四条键修正为单键，避免异常价态导致显式 `C` 和红线。要画联苯，请先放置两个独立苯环再用单键连接；要画共边稠环，请把环模板点在已有的键上。
+Click **Agent** to let a configured model read the current canvas KET/SMILES and answer questions or propose natural-language edits. The Agent can add structures, editable text, reaction arrows, moves, rotations, alignments, atom changes, bond changes, and background highlights. New content without an explicit position is placed in the blank area to the right.
 
-## 画布 Agent
+Ordinary answers appear directly. A canvas modification shows a summary and warning, and changes enter the canvas only after **Approve and Apply** is clicked. The whole batch becomes one undoable operation. Providers include OpenAI, Claude (Anthropic), DeepSeek, local endpoints, and custom compatible APIs. See `Agent-Guide.md` for configuration, data handling, and limits.
 
-点击顶部 **Agent** 可让外部大模型读取当前画布的 KET/SMILES，并回答问题或执行自然语言修改指令。Agent 可以组合添加结构、可编辑文字和反应箭头，移动、旋转、对齐对象，并按画布 ID 修改原子和键；未指定位置的新内容自动进入右侧空白区域。普通答复直接显示；只有模型提出画布修改时才显示批准区，点击「批准并应用」后修改才进入画布，顶部撤销可一次恢复整批操作。
+## Saving, undo, and export
 
-Agent 内置 OpenAI、Claude (Anthropic)、DeepSeek、本地接口和自定义兼容接口选项。Claude 预设使用 Anthropic Messages API 和 `claude-sonnet-4-6`，支持图片输入与 JSON Schema 结构化输出。Agent 会读取原子、键、文字、箭头和已有配色的对象映射。每批画布操作最多 20 条，应用前检查对象 ID、坐标和属性范围；存在选区时，对已有对象的修改只能落在选区内。输入区可附加一张 JPEG、PNG、GIF 或 WebP 化学图片；图片上限为 10 MB、最长边 8192 像素。API 密钥使用 Windows 系统加密保存，不进入项目文件。详细配置、数据范围和限制见 `Agent-Guide.md`。
+- Undo and redo cover chemical content and drawing-style changes.
+- `.chemproj` is the complete editable project format. Version 0.4.0 and later store the unified canvas as KET.
+- SVG, transparent PNG, and PDF are intended for figures; KET exports preserve editable chemistry.
+- Saving an existing project keeps a `.bak` copy. **Project Save As** can create a new path.
+- Recovery includes the current main canvas and is written before the application closes.
 
-## 保存、撤销和导出
+## Opening ChemDraw files
 
-- 顶部撤销 / 重做覆盖主画布上的化学内容以及绘图样式变更。
-- `.chemproj` 是完整可编辑项目；0.4.0 使用项目格式版本 2，将整个主画布保存为 KET 化学数据。
-- SVG、透明 PNG、PDF 用于出图；KET 导出可交换全部可编辑内容。
-- 保存已有项目时保留上一份 `.bak`。导出菜单中的「项目另存为」可改名保存。
-- 自动恢复包含当前主画布中的内容；关闭软件时会等待恢复副本写完。
+**Open** accepts `.cdx` and `.cdxml`. Select a page and drawing style in the preview, review object counts, and open the selected page directly in the main canvas.
 
-## 旧版 Structlnk 项目
+You can also copy a molecule or reaction in ChemDraw with Ctrl+C and choose **Paste** from the Structlnk canvas context menu. Native ChemDraw CDX/CDXML data is detected automatically and converted into editable content. If the clipboard contains only EMF or PNG pixels, paste remains disabled. SMILES text can be appended directly.
 
-0.1–0.3 创建的项目会转换到统一画布。分子、独立文字、反应箭头和机理箭头均会转为主画布对象；原始版本 1 数据同时嵌入新项目。
+Multipage files can be imported one page at a time. Complex mechanism arrows, fonts, spectra, tables, OLE attachments, and special layout may change or be omitted. Compare the imported page with the original; Structlnk never overwrites the original ChemDraw file. See `ChemDraw-Import-Guide.md`.
 
-转换属于格式迁移，字体、弯箭头形状和旧版的相对锚点绑定可能变化。打开旧项目后，Ctrl+S 会要求另存一个版本 2 文件，不覆盖原文件。导出菜单可随时导出转换前的原始项目。
+## ACS 1996 Compatible Style
 
-## 打开 ChemDraw 文件
+Choose **ACS 1996 Compatible Style** from the drawing-style selector. The style uses a 14.4 pt calibrated standard bond length, 0.6 pt standard line width, 18% multiple-bond spacing, 2 pt wedge width, 2.5 pt hashed-wedge spacing, and Arial 10 pt labels in black and white.
 
-顶部「打开」支持 `.cdx`、`.cdxml`。选择页面和绘图样式，在预览中检查对象数量，再点「打开所选页」；内容会直接进入主画布，可以立即编辑。
+The SVG area is 540 × 720 pt, PDF is US Letter with 36 pt margins, and transparent PNG is 4500 × 6000 px at 600 dpi. If content exceeds the ACS drawing area, export stops with a warning instead of silently cropping. The style preserves manual atom coordinates, so the selection tool can be used to adjust crowded bond lengths and angles. See `ACS-Style-Notes.md`.
 
-也可以在 ChemDraw 中选中分子并按 **Ctrl+C**，回到 Structlnk 后在画布中右键选择 **粘贴**。软件会自动识别 Windows 剪贴板中的原生 ChemDraw CDX/CDXML 数据，必要时显示导入预览后转成可编辑内容；如果剪贴板只有 EMF、PNG 等图片预览，粘贴选项会保持灰色。SMILES 剪贴板数据可直接追加到当前画布。
+This is an independent implementation from public parameters. It does not copy ChemDraw code, style files, templates, icons, or artwork. The original parameter name is used only as a compatibility reference.
 
-多页文件可逐页导入。复杂机理箭头、字体、谱图、表格、OLE 附件和特殊排版可能发生变化或缺失，数量统计也不能证明无损转换；请对照原稿检查。原 ChemDraw 文件不会被项目保存覆盖。详见 `ChemDraw-Import-Guide.md`。
+## File layout
 
-## ACS 1996 兼容样式
+- `app/`: application source; `unified.js` is the unified-canvas entry point, `clipboard-import.cjs` handles ChemDraw clipboard detection, and `agent-service.cjs` handles model APIs.
+- `app/vendor/ketcher/`: unmodified Ketcher 3.18.0 standalone build.
+- `runtime/`: official Electron 44.4.1 Windows x64 runtime in the full distribution.
+- `examples/`: editable organic-reaction, metal-complex, catalytic-cycle, mechanism, and ACS examples.
+- `licenses/` and `THIRD_PARTY_NOTICES.txt`: third-party licenses, notices, and dependency inventories.
+- `Agent-Guide.md`: API configuration, modification workflow, data scope, and boundaries.
+- `Validation-Results.md`: verification scope and results.
 
-在上方「绘图样式」中选择 **ACS 1996 兼容样式**。样式设置 14.4 pt 默认标准键长、0.6 pt 普通线宽、18% 多重键间距、2 pt 楔形键宽度、2.5 pt 虚线间距参数、Arial 10 pt 原子标签，并使用黑白结构显示。
+## Scope and limitations
 
-- SVG 绘图区：540 × 720 pt。
-- PDF：US Letter 纵向，四边 36 pt，100% 比例。
-- 透明 PNG：4500 × 6000 像素，写入 600 dpi 信息。
-- 如果内容超出 ACS 绘图区，软件会停止导出并提示拆分内容或切换常规绘图，避免静默裁切。
-- 主画布富文本可以保留单独字号；切换样式不会自动整理配合物几何。
-- 使用选择工具可拖动单个原子，手动调整局部键长和键角并拉开拥挤结构。调整后的坐标会进入撤销记录、随项目保存并用于导出，样式不会自动复位这些坐标。
+Organic reactions, metal complexes, catalytic cycles, and mechanisms are represented by editable examples. The examples and Agent assist drawing but do not replace chemical judgment. Check bond order, stereochemistry, charge, coordination direction, and mechanism arrows after importing or using image recognition.
 
-这是 Structlnk 根据公开参数独立实现的兼容样式，没有复制 ChemDraw 的样式文件、模板、图标或代码。14.4 pt 是新绘图及导出标定使用的默认标准键长，不是对每一条键的坐标锁定。标签避让、1.6 pt 标签留白和部分特殊粗键由当前化学引擎处理，不保证与 ChemDraw 像素级相同。详见 `ACS-Style-Notes.md`。
+Structlnk is an independent technical prototype, not a complete ChemDraw replacement. Office round-trip editing, lossless CDX/CDXML round-tripping, 3D coordination validation, multipage Structlnk projects, and multi-user editing are not implemented.
 
-## 文件存放
-
-- `app/`：应用源代码；统一画布入口为 `unified.js`，ChemDraw 剪贴板检测位于 `clipboard-import.cjs`，Agent 接口位于 `agent-service.cjs`。
-- `app/vendor/ketcher/`：未经修改的 Ketcher 3.18.0 官方独立构建。
-- `runtime/`：Electron 44.4.1 官方 Windows x64 运行环境。
-- `examples/`：有机反应、金属配合物、催化循环、反应机理和 ACS 示例。
-- `data/recovery.chemproj`：自动恢复副本；`.bak` 是上一份恢复副本。
-- `licenses/`、`THIRD_PARTY_NOTICES.txt`：第三方许可证、声明与依赖清单。
-- `sources/`：Ketcher / Indigo 原始源码归档与来源哈希。
-- `Agent-Guide.md`：API 配置、修改流程、数据发送范围与边界。
-- `Validation-Results.md`：实际执行的检查和范围。
-
-## 边界与授权
-
-有机反应、金属配合物、催化循环和反应机理均有可编辑示例。示例与 Agent 只辅助绘图，不替代对具体化学体系的判断。图片识别结果需要核对键级、手性、电荷、配位方向和机理箭头。尚未实现 Office 双击回编、CDX/CDXML 无损往返、三维配位几何验证、多页 Structlnk 项目和多人同时编辑。
-
-本地界面与示例布局为独立编写，没有使用 ChemDraw 的代码、图标或模板库。Ketcher / Indigo 使用 Apache 2.0，Electron 主项目使用 MIT，其他依赖按各自许可证使用。软件离线运行不免除开源许可义务；对外分发、增加字体或插件时仍需核对相应许可。
+The application shell and example layouts are independently authored and do not use ChemDraw code, icons, or template libraries. Ketcher and Indigo use Apache 2.0; Electron uses MIT; other dependencies follow their own licenses. See `THIRD_PARTY_NOTICES.txt` and `licenses/` before redistributing a modified build.
