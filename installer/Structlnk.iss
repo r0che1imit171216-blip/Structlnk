@@ -67,10 +67,10 @@ Source: "{#SourceRoot}\installer\.structlnk-installed"; DestDir: "{app}"; DestNa
 Source: "{#SourceRoot}\APP_SOURCE_SHA256.json"; DestDir: "{app}"; Flags: ignoreversion
 Source: "{#SourceRoot}\THIRD_PARTY_NOTICES.txt"; DestDir: "{app}"; Flags: ignoreversion
 Source: "{#SourceRoot}\THIRD_PARTY_VERSIONS.json"; DestDir: "{app}"; Flags: ignoreversion
-Source: "{#SourceRoot}\README-使用说明.md"; DestDir: "{app}"; Flags: ignoreversion
-Source: "{#SourceRoot}\Agent使用说明.md"; DestDir: "{app}"; Flags: ignoreversion
-Source: "{#SourceRoot}\ACS样式说明.md"; DestDir: "{app}"; Flags: ignoreversion
-Source: "{#SourceRoot}\ChemDraw导入说明.md"; DestDir: "{app}"; Flags: ignoreversion
+Source: "{#SourceRoot}\README-User-Guide.md"; DestDir: "{app}"; Flags: ignoreversion
+Source: "{#SourceRoot}\Agent-Guide.md"; DestDir: "{app}"; Flags: ignoreversion
+Source: "{#SourceRoot}\ACS-Style-Notes.md"; DestDir: "{app}"; Flags: ignoreversion
+Source: "{#SourceRoot}\ChemDraw-Import-Guide.md"; DestDir: "{app}"; Flags: ignoreversion
 
 [Icons]
 Name: "{group}\Structlnk"; Filename: "{app}\runtime\{#AppExeName}"; WorkingDir: "{app}"

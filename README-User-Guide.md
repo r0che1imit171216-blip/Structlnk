@@ -40,7 +40,7 @@
 
 点击顶部 **Agent** 可让外部大模型读取当前画布的 KET/SMILES，并回答问题或执行自然语言修改指令。Agent 可以组合添加结构、可编辑文字和反应箭头，移动、旋转、对齐对象，并按画布 ID 修改原子和键；未指定位置的新内容自动进入右侧空白区域。普通答复直接显示；只有模型提出画布修改时才显示批准区，点击「批准并应用」后修改才进入画布，顶部撤销可一次恢复整批操作。
 
-Agent 内置 OpenAI、Claude (Anthropic)、DeepSeek、本地接口和自定义兼容接口选项。Claude 预设使用 Anthropic Messages API 和 `claude-sonnet-4-6`，支持图片输入与 JSON Schema 结构化输出。Agent 会读取原子、键、文字、箭头和已有配色的对象映射。每批画布操作最多 20 条，应用前检查对象 ID、坐标和属性范围；存在选区时，对已有对象的修改只能落在选区内。输入区可附加一张 JPEG、PNG、GIF 或 WebP 化学图片；图片上限为 10 MB、最长边 8192 像素。API 密钥使用 Windows 系统加密保存，不进入项目文件。详细配置、数据范围和限制见 `Agent使用说明.md`。
+Agent 内置 OpenAI、Claude (Anthropic)、DeepSeek、本地接口和自定义兼容接口选项。Claude 预设使用 Anthropic Messages API 和 `claude-sonnet-4-6`，支持图片输入与 JSON Schema 结构化输出。Agent 会读取原子、键、文字、箭头和已有配色的对象映射。每批画布操作最多 20 条，应用前检查对象 ID、坐标和属性范围；存在选区时，对已有对象的修改只能落在选区内。输入区可附加一张 JPEG、PNG、GIF 或 WebP 化学图片；图片上限为 10 MB、最长边 8192 像素。API 密钥使用 Windows 系统加密保存，不进入项目文件。详细配置、数据范围和限制见 `Agent-Guide.md`。
 
 ## 保存、撤销和导出
 
@@ -62,7 +62,7 @@ Agent 内置 OpenAI、Claude (Anthropic)、DeepSeek、本地接口和自定义�
 
 也可以在 ChemDraw 中选中分子并按 **Ctrl+C**，回到 Structlnk 后在画布中右键选择 **粘贴**。软件会自动识别 Windows 剪贴板中的原生 ChemDraw CDX/CDXML 数据，必要时显示导入预览后转成可编辑内容；如果剪贴板只有 EMF、PNG 等图片预览，粘贴选项会保持灰色。SMILES 剪贴板数据可直接追加到当前画布。
 
-多页文件可逐页导入。复杂机理箭头、字体、谱图、表格、OLE 附件和特殊排版可能发生变化或缺失，数量统计也不能证明无损转换；请对照原稿检查。原 ChemDraw 文件不会被项目保存覆盖。详见 `ChemDraw导入说明.md`。
+多页文件可逐页导入。复杂机理箭头、字体、谱图、表格、OLE 附件和特殊排版可能发生变化或缺失，数量统计也不能证明无损转换；请对照原稿检查。原 ChemDraw 文件不会被项目保存覆盖。详见 `ChemDraw-Import-Guide.md`。
 
 ## ACS 1996 兼容样式
 
@@ -75,7 +75,7 @@ Agent 内置 OpenAI、Claude (Anthropic)、DeepSeek、本地接口和自定义�
 - 主画布富文本可以保留单独字号；切换样式不会自动整理配合物几何。
 - 使用选择工具可拖动单个原子，手动调整局部键长和键角并拉开拥挤结构。调整后的坐标会进入撤销记录、随项目保存并用于导出，样式不会自动复位这些坐标。
 
-这是 Structlnk 根据公开参数独立实现的兼容样式，没有复制 ChemDraw 的样式文件、模板、图标或代码。14.4 pt 是新绘图及导出标定使用的默认标准键长，不是对每一条键的坐标锁定。标签避让、1.6 pt 标签留白和部分特殊粗键由当前化学引擎处理，不保证与 ChemDraw 像素级相同。详见 `ACS样式说明.md`。
+这是 Structlnk 根据公开参数独立实现的兼容样式，没有复制 ChemDraw 的样式文件、模板、图标或代码。14.4 pt 是新绘图及导出标定使用的默认标准键长，不是对每一条键的坐标锁定。标签避让、1.6 pt 标签留白和部分特殊粗键由当前化学引擎处理，不保证与 ChemDraw 像素级相同。详见 `ACS-Style-Notes.md`。
 
 ## 文件存放
 
@@ -86,8 +86,8 @@ Agent 内置 OpenAI、Claude (Anthropic)、DeepSeek、本地接口和自定义�
 - `data/recovery.chemproj`：自动恢复副本；`.bak` 是上一份恢复副本。
 - `licenses/`、`THIRD_PARTY_NOTICES.txt`：第三方许可证、声明与依赖清单。
 - `sources/`：Ketcher / Indigo 原始源码归档与来源哈希。
-- `Agent使用说明.md`：API 配置、修改流程、数据发送范围与边界。
-- `验证结果.md`：实际执行的检查和范围。
+- `Agent-Guide.md`：API 配置、修改流程、数据发送范围与边界。
+- `Validation-Results.md`：实际执行的检查和范围。
 
 ## 边界与授权
 

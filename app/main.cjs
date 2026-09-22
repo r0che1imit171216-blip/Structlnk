@@ -132,7 +132,7 @@ else {
     } finally {printer.destroy();}
   });
   handle('read-notices',async()=>await fs.readFile(path.resolve(root,'../THIRD_PARTY_NOTICES.txt'),'utf8'));
-  handle('read-example',async(key)=>{const names={organic:'01-有机反应.chemproj',metal:'02-金属配合物.chemproj',cycle:'03-催化循环.chemproj',mechanism:'04-反应机理.chemproj'};if(!names[key])throw Error('示例不存在');return await fs.readFile(path.resolve(root,'../examples',names[key]),'utf8');});
+  handle('read-example',async(key)=>{const names={organic:'01-organic-reaction.chemproj',metal:'02-metal-complex.chemproj',cycle:'03-catalytic-cycle.chemproj',mechanism:'04-reaction-mechanism.chemproj'};if(!names[key])throw Error('示例不存在');return await fs.readFile(path.resolve(root,'../examples',names[key]),'utf8');});
   handle('agent-config-get',()=>agent.getConfig());
   handle('agent-config-save',value=>agent.saveConfig(value));
   ipcMain.handle('agent-request',async(e,value)=>{trusted(e);return agent.request(value,p=>{if(win&&!win.isDestroyed())win.webContents.send('agent-progress',p);});});
