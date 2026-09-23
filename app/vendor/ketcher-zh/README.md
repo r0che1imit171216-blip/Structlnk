@@ -1,0 +1,9 @@
+# Ketcher 3.18.0 Chinese UI resources
+
+This directory contains the Chinese `index.html` and the three JavaScript bundles required by Structlnk's main Ketcher editor page. The remaining files (including CSS, images, shared chunks, and license files) are served from the unmodified English distribution in `../ketcher/` to avoid duplicating the full build.
+
+The resources were supplied by the Structlnk maintainer as a post-build localization of Ketcher 3.18.0. Ketcher itself does not provide a locale switch for this standalone build. Structlnk retains the original English build and selects this localized entry when the application language is Chinese. Switching languages saves each open canvas to its recovery copy before reloading the editor.
+
+The supplied package says it made 2,613 text substitutions across seven build artifacts and that reversing its translation process reproduces the upstream files byte-for-byte. It did not include the translation script or dictionary, so those counts and the claimed byte-for-byte reversal could not be independently reproduced here. The three bundles used by Structlnk pass JavaScript syntax checks, and the integrated editor is covered by the language-switch test. A runtime label check confirmed that common toolbar commands are localized, while some bond labels (for example, `Single Bond (1)`), ring-template names, and technical strings remain in English. These checks do not establish that every Chinese technical term is ideal or that every hidden editor string has been translated.
+
+The localization package identifies its source as the Ketcher 3.18.0 standalone distribution by EPAM Systems. Original Ketcher and dependency license files remain in `../ketch/` and `../../../licenses/`; see the repository-level `THIRD_PARTY_NOTICES.txt`. The Chinese UI resources are a community localization and are not an official EPAM language release.

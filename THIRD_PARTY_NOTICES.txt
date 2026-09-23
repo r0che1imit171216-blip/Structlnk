@@ -1,11 +1,11 @@
 Structlnk 0.7.0 - third-party software notices
 
-Ketcher 3.18.0 (unmodified official standalone distribution)
+Ketcher 3.18.0 (official standalone distribution with a separate community Chinese UI build)
 Copyright 2021 EPAM Systems. Apache License 2.0.
 https://github.com/epam/ketcher/tree/v3.18.0
 License: licenses/Ketcher-LICENSE.txt
 Upstream NOTICE: licenses/Ketcher-NOTICE.txt
-Bundled dependency notices: app/vendor/ketcher/static/js/*.LICENSE.txt
+Bundled dependency notices: app/vendor/ketcher/static/js/*.LICENSE.txt (also applies to shared assets used by app/vendor/ketcher-zh/)
 Upstream dependency lock: licenses/Ketcher-package-lock.json
 
 Indigo 1.46.0 (bundled by the Ketcher standalone build)
@@ -21,6 +21,7 @@ License: runtime/LICENSE
 Chromium and bundled third-party notices: runtime/LICENSES.chromium.html
 
 The Structlnk application shell and example layouts are independently authored.
+The Chinese Ketcher UI resources in app/vendor/ketcher-zh/ were supplied by the project maintainer as a localization of selected Ketcher 3.18.0 build artifacts. The original English distribution remains in app/vendor/ketcher/. The localization is not an official EPAM release; see app/vendor/ketcher-zh/README.md for verification scope and limitations.
 System fonts are referenced; font files are not redistributed by the shell.
 There is no ChemDraw code, artwork or template library in this project.
 Ketcher and Electron trademarks belong to their respective owners; no endorsement is implied.

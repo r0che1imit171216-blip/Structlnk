@@ -47,9 +47,21 @@ else {
     try {
       if (req.method !== 'GET' && req.method !== 'HEAD') {res.writeHead(405);return res.end();}
       const relative = decodeURIComponent(new URL(req.url,'http://localhost').pathname);
-      const file = path.resolve(root,'.'+(relative==='/'?'/index.html':relative));
+      let file = path.resolve(root,'.'+(relative==='/'?'/index.html':relative));
       if (!file.startsWith(root+path.sep) || !['/vendor/','/assets/'].some(p=>relative.startsWith(p)) && !['/','/index.html','/app.js','/unified.js','/unified-model.mjs','/model.mjs','/scene.mjs','/drawing-style.mjs','/chemdraw-import.mjs','/ket-normalize.mjs','/agent-ui.mjs','/i18n.mjs','/styles.css'].includes(relative)) {res.writeHead(403);return res.end();}
-      const content = await fs.readFile(file);
+      let content;
+      try { content = await fs.readFile(file); }
+      catch(e) {
+        if(e.code!=='ENOENT'||!relative.startsWith('/vendor/ketcher-zh/'))throw e;
+        file=path.resolve(root,'.'+relative.replace('/vendor/ketcher-zh/','/vendor/ketcher/'));
+        if(!file.startsWith(root+path.sep))throw Error('Invalid vendor asset path');
+        content=await fs.readFile(file);
+      }
+      if(relative==='/'||relative==='/index.html'){
+        let language='zh';
+        try{const settings=JSON.parse(await fs.readFile(path.join(dataDir,'ui-settings.json'),'utf8'));if(settings?.language==='en')language='en';}catch(e){if(e.code!=='ENOENT')throw e;}
+        content=Buffer.from(content.toString('utf8').replace('<script>document.getElementById',`<script>window.__STRUCTLNK_LANGUAGE__='${language}';document.getElementById`));
+      }
       res.writeHead(200,{'Content-Type':mime[path.extname(file)]||'application/octet-stream','X-Content-Type-Options':'nosniff','Cache-Control':'no-cache'});res.end(content);
     } catch {res.writeHead(404);res.end('Not found');}
   });
@@ -98,6 +110,7 @@ else {
   handle('autosave-meta',async text=>{checkText(text);await atomicWrite(path.join(dataDir,'recovery-meta.json'),text);return true;});
   handle('language-get',async()=>{try{const value=JSON.parse(await fs.readFile(path.join(dataDir,'ui-settings.json'),'utf8'));return value?.language==='en'?'en':'zh';}catch(e){if(e.code==='ENOENT')return 'zh';throw Error('无法读取界面语言设置');}});
   handle('language-save',async language=>{if(!['zh','en'].includes(language))throw Error('界面语言设置无效');await atomicWrite(path.join(dataDir,'ui-settings.json'),JSON.stringify({language},null,2));return language;});
+  handle('language-reload',async()=>{if(win&&!win.isDestroyed())win.webContents.reload();return true;});
   handle('chemdraw-clipboard-read',readChemDrawClipboard);
   handle('canvas-clipboard-write',async source=>{checkText(source);if(!source.trim())throw Error('复制内容为空');clipboard.writeText(source);return true;});
   handle('canvas-shortcut',async action=>{const keys={copy:'C',paste:'V',selectAll:'A'};if(!keys[action])throw Error('画布快捷操作无效');win.webContents.sendInputEvent({type:'keyDown',keyCode:keys[action],modifiers:['control']});win.webContents.sendInputEvent({type:'keyUp',keyCode:keys[action],modifiers:['control']});return true;});
