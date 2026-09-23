@@ -9,6 +9,7 @@ contextBridge.exposeInMainWorld('desktop',{
   recover:()=>ipcRenderer.invoke('recover'),
   languageGet:()=>ipcRenderer.invoke('language-get'),
   languageSave:value=>ipcRenderer.invoke('language-save',value),
+  reloadForLanguage:()=>ipcRenderer.invoke('language-reload'),
   readChemDrawClipboard:()=>ipcRenderer.invoke('chemdraw-clipboard-read'),
   writeCanvasClipboard:source=>ipcRenderer.invoke('canvas-clipboard-write',source),
   canvasShortcut:action=>ipcRenderer.invoke('canvas-shortcut',action),
